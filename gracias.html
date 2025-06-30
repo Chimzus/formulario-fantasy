@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¡Gracias por tu Retroalimentación!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff8f0;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 60px;
+      color: #ff69b4;
+      font-size: 2.5em;
+      z-index: 10;
+      position: relative;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #990066;
+      z-index: 10;
+      position: relative;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .emoji {
+      font-size: 3rem;
+      animation: float 4s ease-in-out infinite;
+      position: absolute;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .volver {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 10px 20px;
+      background-color: #ffccff;
+      color: #660066;
+      border-radius: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      z-index: 10;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 ¡Gracias por tu Retroalimentación! 🎉</h1>
+  <p>Tu opinión nos ayuda a mejorar cada celebración 🥳</p>
+
+  <!-- Confetti -->
+  <canvas id="confetti"></canvas>
+
+  <!-- Emojis de globos flotando -->
+  <div class="emoji" style="left: 10%;">🎈</div>
+  <div class="emoji" style="left: 30%;">🎈</div>
+  <div class="emoji" style="left: 50%;">🎈</div>
+  <div class="emoji" style="left: 70%;">🎈</div>
+  <div class="emoji" style="left: 90%;">🎈</div>
+
+  <a href="index.html" class="volver">Volver al sitio</a>
+
+  <script>
+    // Confetti canvas
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pieces = [];
+
+    for (let i = 0; i < 150; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 8 + 2,
+        speed: Math.random() * 3 + 1,
+        color: `hsl(${Math.random() * 360}, 100%, 70%)`,
+        angle: Math.random() * 360
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of pieces) {
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
+        ctx.fill();
+        p.y += p.speed;
+        p.x += Math.sin(p.angle) * 2;
+        if (p.y > canvas.height) p.y = 0;
+        if (p.x > canvas.width) p.x = 0;
+        p.angle += 0.01;
+      }
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    // Asegura que canvas siempre cubra toda la pantalla
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salón de Fiestas Infantiles - Retroalimentación</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #fff8f0;
+      color: #444;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #ffccff;
+      padding: 20px;
+      text-align: center;
+      color: #660066;
+    }
+    h1 {
+      margin: 0;
+    }
+    .content {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    iframe {
+      width: 100%;
+      height: 1000px;
+      border: none;
+    }
+    footer {
+      background-color: #ffccff;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9em;
+      color: #660066;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎉 ¡Gracias por Celebrar con Nosotros! 🎉</h1>
+    <p>Por favor, cuéntanos cómo fue tu experiencia</p>
+  </header>
+
+  <div class="content">
+    <iframe id="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLScJhE27XkOBMNpYFV5t76vtdcACVQVBW3HFQaBn4NMfkzHb8A/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+  </div>
+
+  <footer>
+    &copy; 2025 Salón de Fiestas Infantiles “Salon fantasy”
+  </footer>
+
+  <script>
+    // Verificar cada medio segundo si el iframe cambió a formResponse
+    const iframe = document.getElementById('formulario');
+
+    setInterval(() => {
+      try {
+        const formURL = iframe.contentWindow.location.href;
+        if (formURL.includes('formResponse')) {
+          window.location.href = 'gracias.html'; // Redireccionar
+        }
+      } catch (err) {
+      }
+    }, 500);
+  </script>
+
+</body>
+</html>
